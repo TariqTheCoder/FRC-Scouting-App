@@ -1,0 +1,212 @@
+:root {
+    --primary-bg: #0a0a0a;
+    --secondary-bg: #1a1a1a;
+    --accent-red: #e63946;
+    --accent-dark-red: #9e2a2b;
+    --text-primary: #f1faee;
+    --text-secondary: #a8dadc;
+    --accent-blue: #457b9d;
+    --accent-dark-blue: #1d3557;
+}
+
+body {
+    margin: 0;
+    padding: 2rem;
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    background-image: radial-gradient(circle at 10% 20%, rgba(230, 57, 70, 0.1) 0%, rgba(10, 10, 10, 1) 90%);
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+form {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+    border: 1px solid var(--accent-red);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+    background-color: var(--secondary-bg);
+    margin: 0 auto;
+}
+
+.scouting-options {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.summary-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.summary-input {
+    padding: 1rem;
+    border-radius: 6px;
+    border: 2px solid var(--accent-blue);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(69, 123, 157, 0.4);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-input:focus {
+    outline: none;
+    border-color: var(--accent-dark-blue);
+    box-shadow: 0 0 8px rgba(69, 123, 157, 0.6);
+}
+
+.scout-btn,
+.analysis-btn,
+.data-analysis-btn {
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    border-radius: 6px;
+    padding: 1.5rem 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 250px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.scout-btn {
+    border: 2px solid var(--accent-red);
+}
+
+.scout-btn:hover {
+    background-color: var(--accent-red);
+    color: var(--text-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(230, 57, 70, 0.4);
+}
+
+.scout-btn:active {
+    transform: translateY(1px);
+    background-color: var(--accent-dark-red);
+}
+
+.analysis-btn {
+    border: 2px solid var(--accent-blue);
+}
+
+.analysis-btn:hover {
+    background-color: var(--accent-blue);
+    color: var(--text-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(69, 123, 157, 0.4);
+}
+
+.analysis-btn:active {
+    transform: translateY(1px);
+    background-color: var(--accent-dark-blue);
+}
+
+.data-analysis-btn {
+    border: 2px solid #00ffff; /* Cyan */
+}
+
+.data-analysis-btn:hover {
+    background-color: #00ffff;
+    color: var(--primary-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 255, 255, 0.4);
+}
+
+.data-analysis-btn:active {
+    transform: translateY(1px);
+    background-color: #008b8b;
+}
+
+@media (max-width: 600px) {
+    .scouting-options {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .logo span {
+        font-size: 2.5rem;
+    }
+}
+
+.summary-table {
+    width: 90%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    background-color: var(--secondary-bg);
+    color: var(--text-primary);
+}
+
+.summary-table th,
+.summary-table td {
+    border: 1px solid var(--accent-blue);
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+.summary-table th {
+    background-color: var(--accent-dark-blue);
+    color: var(--text-primary);
+}
+
+
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.compact-table {
+    font-size: 10px;
+    width: max-content;
+    border-collapse: collapse;
+}
+
+.compact-table th,
+.compact-table td {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.logo span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: var(--accent-red);
+    text-shadow: 0 0 10px rgba(230, 57, 70, 0.7);
+}

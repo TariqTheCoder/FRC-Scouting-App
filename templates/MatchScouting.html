@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Match Scouting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/match.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Match Scouting Submission</h1>
+      <form action="/submit-match-data/" method="POST" id="data">
+        <div class="section">
+          <h2>Pregame</h2>
+          <div class="counter">
+            <label for="match_number">Match Number:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('match_number')">-</button>
+              <input type="number" id="match_number" name="match_number" value="0" min="0" required>
+              <button type="button" onclick="increment('match_number')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="team_number">Team Number:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('team_number')">-</button>
+              <input type="number" id="team_number" name="team_number" value="0" min="0" required>
+              <button type="button" onclick="increment('team_number')">+</button>
+            </div>
+          </div>
+          <label for="scouter_name">Scouter Name:</label>
+          <input type="text" id="scouter_name" name="scouter_name" required>
+        </div>
+        <div class="section">
+          <h2>Auto Performance</h2>
+            <div class="option-group" style="display: flex; flex-direction: column; align-items: center;">
+            <label style="margin-bottom: 8px;">Starting Position:</label>
+            <div class="radio-options" style="display: flex; gap: 20px; justify-content: center;">
+              <label>
+              <input type="radio" name="starting_pos" value="left"> Left
+              </label>
+              <label>
+              <input type="radio" name="starting_pos" value="middle"> Middle
+              </label>
+              <label>
+              <input type="radio" name="starting_pos" value="right"> Right
+              </label>
+            </div>
+            </div>
+          <h3>Auto Scoring</h3>
+          <div class="counter">
+            <label for="l1_auto">L1:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l1_auto')">-</button>
+              <input type="number" id="l1_auto" name="l1_auto" value="0" min="0">
+              <button type="button" onclick="increment('l1_auto')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="l2_auto">L2:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l2_auto')">-</button>
+              <input type="number" id="l2_auto" name="l2_auto" value="0" min="0">
+              <button type="button" onclick="increment('l2_auto')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="l3_auto">L3:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l3_auto')">-</button>
+              <input type="number" id="l3_auto" name="l3_auto" value="0" min="0">
+              <button type="button" onclick="increment('l3_auto')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="l4_auto">L4:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l4_auto')">-</button>
+              <input type="number" id="l4_auto" name="l4_auto" value="0" min="0">
+              <button type="button" onclick="increment('l4_auto')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="algae_auto">Algae:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('algae_auto')">-</button>
+              <input type="number" id="algae_auto" name="algae_auto" value="0" min="0">
+              <button type="button" onclick="increment('algae_auto')">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Teleop Scoring</h2>
+          <div class="counter">
+            <label for="l1">L1:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l1')">-</button>
+              <input type="number" id="l1" name="l1" value="0" min="0">
+              <button type="button" onclick="increment('l1')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="l2">L2:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l2')">-</button>
+              <input type="number" id="l2" name="l2" value="0" min="0">
+              <button type="button" onclick="increment('l2')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="l3">L3:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l3')">-</button>
+              <input type="number" id="l3" name="l3" value="0" min="0">
+              <button type="button" onclick="increment('l3')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="l4">L4:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('l4')">-</button>
+              <input type="number" id="l4" name="l4" value="0" min="0">
+              <button type="button" onclick="increment('l4')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="algae">Algae:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('algae')">-</button>
+              <input type="number" id="algae" name="algae" value="0" min="0">
+              <button type="button" onclick="increment('algae')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="intake_missed">Times Intake Missed:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('intake_missed')">-</button>
+              <input type="number" id="intake_missed" name="intake_missed" value="0" min="0">
+              <button type="button" onclick="increment('intake_missed')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="scorer_missed">Times Scorer Missed:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('scorer_missed')">-</button>
+              <input type="number" id="scorer_missed" name="scorer_missed" value="0" min="0">
+              <button type="button" onclick="increment('scorer_missed')">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Defense</h2>
+          <div class="option-group">
+            <label>Method of Defending:</label>
+            <div class="radio-options">
+              <label>
+                <input type="radio" name="defense_method" value="none"> None </label>
+              <label>
+                <input type="radio" name="defense_method" value="blocking"> Blocking at source </label>
+              <label>
+                <input type="radio" name="defense_method" value="disrupting"> Disrupting scoring </label>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="defense_amount">Defense Amount:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('defense_amount')">-</button>
+              <input type="number" id="defense_amount" name="defense_amount" value="0" min="0">
+              <button type="button" onclick="increment('defense_amount')">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <label for="penalty_amount">Penalty Amount:</label>
+            <div class="counter-controls">
+              <button type="button" onclick="decrement('penalty_amount')">-</button>
+              <input type="number" id="penalty_amount" name="penalty_amount" value="0" min="0">
+              <button type="button" onclick="increment('penalty_amount')">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Endgame</h2>
+          <div class="option-group">
+            <label>Endgame Type:</label>
+            <div class="radio-options" style="display: flex; gap: 20px; justify-content: center;">
+              <label>
+                <input type="radio" name="endgame_type" value="none"> None </label>
+              <label>
+                <input type="radio" name="endgame_type" value="low"> Deep climb </label>
+              <label>
+                <input type="radio" name="endgame_type" value="hang"> Shallow climb </label>
+              <label>
+                <input type="radio" name="endgame_type" value="traversal"> Park </label>
+            </div>
+          </div>
+        <div class="option-group">
+            <label>Failed endgame? </label>
+            <div class="radio-options" style="display: flex; gap: 20px; justify-content: center;">
+              <label>
+                <input type="radio" name="failed_endgame" value="no"> No </label>
+              <label>
+                <input type="radio" name="failed_endgame" value="yes"> Yes </label>
+            </div>
+            
+          </div>
+        </div>
+        <h2>Miscellaneous</h2>
+        <div class="section">
+          <div class="option-group">
+            <label>Is disabled?</label>
+            <label class="radio-options" style="display: flex; gap: 20px; justify-content: center;">
+              <label>
+                <input type="radio" id="disabled" name="is_disabled" value="no"> No </label>
+              <label>
+                <input type="radio" id="disabled" name="is_disabled" value="yes"> Yes  </label>
+          </div>
+          <div class="option-group">
+            <label>Is tipped?</label>
+            <label class="radio-options" style="display: flex; gap: 20px; justify-content: center;">
+              <label>
+              <input type="radio" id="tipped" name="tipped" value="no"> No </label>
+              <label>
+                <input type="radio" id="tipped" name="tipped" value="yes"> Yes </label>
+          </div> 
+      
+          <button type="submit">Submit Data</button>
+        </div>
+      </form>
+    </div>
+    <script src="{{ url_for('static', filename='javascript/scouting_utils.js') }}"></script>
+  </body>
+</html>

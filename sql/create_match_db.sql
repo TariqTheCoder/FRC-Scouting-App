@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS match_scouting
+  (
+     match_number   INTEGER,
+     team_number    INTEGER,
+     scouter_name   TEXT,
+     starting_pos   TEXT,
+     l1_auto        INTEGER,
+     l2_auto        INTEGER,
+     l3_auto        INTEGER,
+     l4_auto        INTEGER,
+     algae_auto     INTEGER,
+     l1             INTEGER,
+     l2             INTEGER,
+     l3             INTEGER,
+     l4             INTEGER,
+     algae          INTEGER,
+     intake_missed  INTEGER,
+     scorer_missed  INTEGER,
+     defense_method TEXT,
+     defense_amount INTEGER,
+     penalty_amount INTEGER,
+     endgame_type   TEXT,
+     failed_endgame TEXT,
+     is_disabled    TEXT,
+     tipped         TEXT
+  )

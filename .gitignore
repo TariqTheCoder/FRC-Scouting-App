@@ -1,0 +1,9 @@
+.idea
+env
+.vscode
+__pycache__
+public
+.venv
+instance/
+test.py
+venv

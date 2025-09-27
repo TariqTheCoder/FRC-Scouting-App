@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+  <title>Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary-bg: #0a0a0a;
+      --secondary-bg: #1a1a1a;
+      --accent-red: #e63946;
+      --accent-dark-red: #9e2a2b;
+      --text-primary: #f1faee;
+      --text-secondary: #a8dadc;
+      --accent-blue: #457b9d;
+      --accent-dark-blue: #1d3557;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Mono', monospace;
+      background-color: var(--primary-bg);
+      color: var(--text-primary);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: radial-gradient(circle at 10% 20%, rgba(230, 57, 70, 0.1) 0%, rgba(10, 10, 10, 1) 90%);
+    }
+    .container {
+      text-align: center;
+      max-width: 700px;
+      padding: 2rem;
+      border: 1px solid var(--accent-red);
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+      background-color: var(--secondary-bg);
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: var(--accent-red);
+      margin-bottom: 1rem;
+    }
+    .input {
+      width: 80%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      background-color: var(--primary-bg);
+      border: 1px solid #ccc;
+      color: var(--text-primary);
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 1rem 2rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 2px solid var(--accent-red);
+      background-color: var(--primary-bg);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      min-width: 250px;
+    }
+    button:hover {
+      background-color: var(--accent-red);
+      transform: translateY(-3px);
+    }
+    button:active {
+      background-color: var(--accent-dark-red);
+      transform: translateY(1px);
+    }
+    .hidden {
+      display: none;
+    }
+    .data-analysis-btn {
+      border-color: #00ffff;
+    }
+    .data-analysis-btn:hover {
+      background-color: #00ffff;
+      color: var(--primary-bg);
+    }
+    .data-analysis-btn:active {
+      background-color: #008b8b;
+    }
+    .admin-link {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      text-align: center;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .admin-link a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .admin-link a:hover {
+      color: var(--text-secondary);
+      text-shadow: 0 0 5px rgba(168, 218, 220, 0.7);
+    }
+    textarea {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      background-color: #111;
+      color: #f1faee;
+      border: 1px solid var(--accent-red);
+      border-radius: 4px;
+    }
+    pre {
+      text-align: left;
+      background: #111;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login-section">
+      <h1>Admin Login</h1>
+      <input type="text" id="username" class="input" placeholder="Username" />
+      <input type="password" id="password" class="input" placeholder="Password" />
+      <button onclick="checkLogin()">Login</button>
+      <p id="login-error" style="color: #ff7777;"></p>
+    </div>
+
+    <div id="admin-section" class="hidden">
+      <h1>Admin Panel</h1>
+
+      <!-- Clear Match Data -->
+      <form id="clearMatchForm" action="/clear_match">
+        <button type="button" id="clearMatchBtn" onclick="confirmClearMatch()">Clear Match Data</button>
+      </form>
+
+      <!-- Clear Pit Data -->
+      <form id="clearPitForm" action="/clear_pit">
+        <button type="button" id="clearPitBtn" onclick="confirmClearPit()">Clear Pit Data</button>
+      </form>
+
+      <!-- Run Analysis -->
+      <form method="POST" action="/run_analysis">
+        <button type="submit" class="data-analysis-btn">Run Analysis</button>
+      </form>
+
+      <!-- SQL Console -->
+      <h2 style="margin-top: 2rem;">SQL Console</h2>
+      <form method="POST" action="/run_sql">
+        <textarea name="sql" rows="6" placeholder="Type your SQL command here..."></textarea>
+        <br />
+        <button type="submit">Execute SQL</button>
+      </form>
+      {% if sql_result %}
+        <pre>{{ sql_result }}</pre>
+      {% endif %}
+
+      <!-- Navigation Link -->
+      <div class="admin-link">
+        <a href="/">Go Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkLogin() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const error = document.getElementById('login-error');
+
+      if (user === 'NormanhurstNitro-Reefscape' && pass === '4739-2025') {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('admin-section').classList.remove('hidden');
+        error.textContent = '';
+      } else {
+        error.textContent = 'Incorrect username or password.';
+      }
+    }
+
+    let matchConfirmed = false;
+    function confirmClearMatch() {
+      const btn = document.getElementById('clearMatchBtn');
+      if (!matchConfirmed) {
+        btn.textContent = "Are you sure?";
+        btn.style.backgroundColor = "#457b9d";
+        matchConfirmed = true;
+      } else {
+        document.getElementById('clearMatchForm').submit();
+      }
+    }
+
+    let pitConfirmed = false;
+    function confirmClearPit() {
+      const btn = document.getElementById('clearPitBtn');
+      if (!pitConfirmed) {
+        btn.textContent = "Are you sure?";
+        btn.style.backgroundColor = "#457b9d";
+        pitConfirmed = true;
+      } else {
+        document.getElementById('clearPitForm').submit();
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Pit Scouting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pit.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Pit Scouting Submission</h1>
+        <form action="/submit-pit-data/" method="POST" id="pitData" enctype="multipart/form-data">
+
+            <div class="section">
+                <h2>General & Team Info</h2>
+                <div class="form-group">
+                    <label for="scouter_name">Scouter Name/Initials:</label>
+                    <input type="text" id="scouter_name" name="scouter_name" required>
+                </div>
+
+                <label for="team_number">Team Number:</label>
+                <div class="team-dropdown">
+                    <input type="number" id="team_number" name="team_number" min="1" required>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Autonomous & Scoring</h2>
+                    <div class="form-group">
+                        <label for="main_scoring_area">What is your main scoring area?</label>
+                        <select id="main_scoring_area" name="main_scoring_area" required>
+                            <option value="" disabled selected></option>
+                            <option value="L1">L1</option>
+                            <option value="L2">L2</option>
+                            <option value="L3">L3</option>
+                            <option value="L4">L4</option>
+                            <option value="L2-L4">L2-L4</option>
+                            <option value="L2-L3">L2-L3</option>
+                            <option value="All">All Levels</option>
+                        </select>
+                    </div>
+                <div class="form-group">
+                    <label for="focus_algae_processor">Do they have algae processor capabilities?</label>
+                    <select id="focus_algae_processor" name="focus_algae_processor" required>
+                        <option value="" disabled selected></option>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="focus_algae_net">Do they have algae net capabilities?</label>
+                    <select id="focus_algae_net" name="focus_algae_net" required>
+                        <option value="" disabled selected></option>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="auto_routine">Do they have an auto routine?</label>
+                    <select id="auto_routine" name="auto_routine" required>
+                        <option value="" disabled selected></option>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pathplanner">Do they use pathplanner?</label>
+                    <select id="pathplanner" name="pathplanner" required>
+                        <option value="" disabled selected></option>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Counters -->
+            <div class="section">
+                <div class="counter">
+                    <label for="l1_auto">L1:</label>
+                    <div class="counter-controls">
+                        <button type="button" onclick="decrement('l1_auto')">-</button>
+                        <input type="number" id="l1_auto" name="l1_auto" value="0" min="0">
+                        <button type="button" onclick="increment('l1_auto')">+</button>
+                    </div>
+                </div>
+
+                <div class="counter">
+                    <label for="l2_auto">L2:</label>
+                    <div class="counter-controls">
+                        <button type="button" onclick="decrement('l2_auto')">-</button>
+                        <input type="number" id="l2_auto" name="l2_auto" value="0" min="0">
+                        <button type="button" onclick="increment('l2_auto')">+</button>
+                    </div>
+                </div>
+
+                <div class="counter">
+                    <label for="l3_auto">L3:</label>
+                    <div class="counter-controls">
+                        <button type="button" onclick="decrement('l3_auto')">-</button>
+                        <input type="number" id="l3_auto" name="l3_auto" value="0" min="0">
+                        <button type="button" onclick="increment('l3_auto')">+</button>
+                    </div>
+                </div>
+
+                <div class="counter">
+                    <label for="l4_auto">L4:</label>
+                    <div class="counter-controls">
+                        <button type="button" onclick="decrement('l4_auto')">-</button>
+                        <input type="number" id="l4_auto" name="l4_auto" value="0" min="0">
+                        <button type="button" onclick="increment('l4_auto')">+</button>
+                    </div>
+                </div>
+
+                <div class="counter">
+                    <label for="algae_auto">Algae:</label>
+                    <div class="counter-controls">
+                        <button type="button" onclick="decrement('algae_auto')">-</button>
+                        <input type="number" id="algae_auto" name="algae_auto" value="0" min="0">
+                        <button type="button" onclick="increment('algae_auto')">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endgame Section -->
+            <div class="section">
+                <h2>Endgame Info</h2>
+                <div class="form-group">
+                    <label for="endgame_aim">What climber/endgame do you aim for?</label>
+                    <select id="endgame_aim" name="endgame_aim" required>
+                        <option value="" disabled selected></option>
+                        <option value="deep_cage">Deep cage</option>
+                        <option value="shallow_cage">Shallow cage</option>
+                        <option value="park">Park</option>
+                        <option value="na">N/A</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Strategy Section -->
+            <div class="section">
+                <h2>Strategy Info</h2>
+
+                <div class="form-group">
+                    <label for="focus_defense">Do they focus on defense?</label>
+                    <select id="focus_defense" name="focus_defense" required>
+                        <option value="" disabled selected></option>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="strategy_priority">Preferred Coral Strategy:</label>
+                    <select id="strategy_priority" name="strategy_priority">
+                        <option value="" disabled selected></option>
+                        <option value="low">Low</option>
+                        <option value="moderate">Medium (L2 - L3)</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="strategy_algae">Preferred Algae Strategy:</label>
+                    <select id="strategy_algae" name="strategy_algae">
+                        <option value="" disabled selected></option>
+                        <option value="processor">Processor</option>
+                        <option value="net">Net</option>
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Misc Section -->
+            <div class="section">
+                <h2>Misc</h2>
+                <div class="form-group">
+                    <label for="drivetrain">Drivetrain Type:</label>
+                    <select id="drivetrain" name="drivetrain" required>
+                        <option value="" disabled selected></option>
+                        <option value="mecanum">Mecanum</option>
+                        <option value="tank">Tank</option>
+                        <option value="swerve">Swerve</option>
+                        <option value="omni">Omni</option>
+                    </select>
+                </div>
+                <button type="submit">Submit Pit Data</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='javascript/scouting_utils.js') }}"></script>
+</body>
+
+</html>

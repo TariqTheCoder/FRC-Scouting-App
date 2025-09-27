@@ -1,0 +1,33 @@
+INSERT INTO pit_scouting (
+  scouter_name,
+  team_number,
+  main_scoring_area,
+  focus_algae_processor,
+  focus_algae_net,
+  auto_routine,
+  pathplanner,
+  l1_auto,
+  l2_auto,
+  l3_auto,
+  l4_auto,
+  algae_auto,
+  endgame_aim,
+  focus_defense,
+  drivetrain
+) VALUES (
+  %(scouter_name)s,
+  %(team_number)s,
+  %(main_scoring_area)s,
+  %(focus_algae_processor)s,
+  %(focus_algae_net)s,
+  %(auto_routine)s,
+  %(pathplanner)s,
+  %(l1_auto)s,
+  %(l2_auto)s,
+  %(l3_auto)s,
+  %(l4_auto)s,
+  %(algae_auto)s,
+  %(endgame_aim)s,
+  %(focus_defense)s,
+  %(drivetrain)s
+);

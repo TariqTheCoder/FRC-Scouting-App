@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Project C.L.U.T.C.H. - Robotics Scouting Software by 4739</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <span>Project CLUTCH from 4739</span>
+        </div>
+        <h1>Scouting System</h1>
+        <p class="subtitle">Comprehensive Logging & Unified Team Competition Hub</p>
+
+        <div class="scouting-options">
+            <button class="scout-btn" onclick="location.href='/match-scouting'">
+                <i class="fas fa-robot"></i> Match Scouting
+            </button>
+            <button class="scout-btn" onclick="location.href='/pit-scouting'">
+                <i class="fas fa-tools"></i> Pit Scouting
+            </button>
+            <button class="scout-btn data-analysis-btn" onclick="location.href='/data-analysis'">
+                <i class="fas fa-chart-line"></i> Data Analysis
+            </button>
+        </div>
+<div class="admin-nav-link">
+    <a href="/sys_admin/">Go to Admin Console</a>
+</div>
+        <div class="version">v0.43 [beta] | FRC #4739</div>
+    </div>
+
+    <!-- Font Awesome for icons (optional) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

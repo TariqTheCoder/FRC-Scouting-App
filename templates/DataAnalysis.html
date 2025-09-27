@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Data Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/data.css') }}">
+</head>
+<body>
+        <div class="logo">
+            <span>Data Analysis Page</span>
+        </div>
+            <h1>Computer Recommended</h1>
+        <br>
+    <h2>View Summaries</h2>
+<div class="scouting-options">
+    <form action="/match-summary" method="POST" class="summary-form">
+        <label>
+            <input type="text" name="team_number" placeholder="Team Number" required class="summary-input">
+        </label>
+        <button type="submit" class="analysis-btn">Match Summary</button>
+    </form>
+
+    <form action="/pit-summary" method="POST" class="summary-form">
+        <label>
+            <input type="text" name="team_number" placeholder="Team Number" required class="summary-input">
+        </label>
+        <button type="submit" class="analysis-btn">Pit Summary</button>
+    </form>
+</div>
+
+<h2>View Full Datasets</h2>
+<div class="scouting-options">
+    <form action="/full-pit" method="GET" class="summary-form">
+        <input type="hidden" name="view" value="pit">
+        <button type="submit" class="analysis-btn">Full Pit Data</button>
+    </form>
+
+    <form action="/full-match" method="GET" class="summary-form">
+        <input type="hidden" name="view" value="match">
+        <button type="submit" class="analysis-btn">Full Match Data</button>
+    </form>
+</div>
+
+    <!-- Jinja2 -->
+
+    {% if pie_source %}
+    {{ pie_source | safe}}"
+{% endif %}
+{% if match_summary %}
+<h2>Team {{ team_number }} Match Summary</h2>
+<table class="summary-table">
+    <thead>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, value in match_summary.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    {% if boxplot_source %}
+        {{ boxplot_source | safe }}
+    {% endif %}
+
+{% endif %}
+
+{% if pit_summary %}
+<h2>Team {{ team_number }} Match Summary</h2>
+<table class="summary-table">
+    <thead>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, value in pit_summary.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if full_pit_data %}
+<h2>Full Pit Scouting Data</h2>
+<div class="table-container" >
+    <table class="summary-table" >
+        <thead>
+            <tr>
+                {% for header in full_pit_data[0].keys() %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in full_pit_data %}
+                <tr>
+                    {% for cell in row.values() %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <a id="downloadPitCSV" href="#" download="pit_data.csv">Download Pit Data as CSV</a>
+
+    <script>
+    const pitData = {{ full_pit_data | tojson }};
+    function dictArrayToCSV(data) {
+        if (!data.length) return '';
+        const headers = Object.keys(data[0]);
+        const rows = data.map(row => headers.map(h => `"${('' + row[h]).replace(/"/g, '""')}"`).join(','));
+        return [headers.join(','), ...rows].join('\n');
+    }
+
+    function createCSVDownloadLink() {
+        const csv = dictArrayToCSV(pitData);
+        const blob = new Blob([csv], {type: 'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const link = document.getElementById('downloadPitCSV');
+        link.href = url;
+    }
+
+    window.onload = createCSVDownloadLink;
+    </script>
+{% endif %}
+
+{% if full_match_data %}
+<h2>Full Match Scouting Data</h2>
+<div class="table-container">
+    <table class="summary-table">
+        <thead>
+            <tr>
+                {% for header in full_match_data[0].keys() %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in full_match_data %}
+                <tr>
+                    {% for cell in row.values() %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <a id="downloadPitCSV" href="#" download="match_data.csv">Download Match Data as CSV</a>
+    <script src="{{ url_for('static', filename='javascript/match_export.js') }}"></script>
+
+    <script>
+    const matchData = {{ full_match_data | tojson }};
+    function dictArrayToCSV(data) {
+        if (!data.length) return '';
+        const headers = Object.keys(data[0]);
+        const rows = data.map(row => headers.map(h => `"${('' + row[h]).replace(/"/g, '""')}"`).join(','));
+        return [headers.join(','), ...rows].join('\n');
+    }
+
+    function createCSVDownloadLink() {
+        const csv = dictArrayToCSV(matchData);
+        const blob = new Blob([csv], {type: 'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const link = document.getElementById('downloadPitCSV');
+        link.href = url;
+    }
+
+    window.onload = createCSVDownloadLink;
+    </script>
+{% endif %}
+</body>
+</html>
